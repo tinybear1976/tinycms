@@ -1,0 +1,17 @@
+publishing:
+  server: "127.0.0.1:9000"
+redis:
+  local:
+    server: "127.0.0.1"
+    port: 6379
+    pwd: 
+    db: 0
+mariadb:
+  tcms:
+    server: "172.16.1.250"
+    port: 3306
+    uid: root
+    pwd: "123"
+    db: test
+    timeout: 10
+    
