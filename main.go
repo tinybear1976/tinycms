@@ -1,7 +1,7 @@
 /*
  * @Author: wang
  * @Date: 2021-11-10 12:05:18
- * @LastEditTime: 2021-11-10 12:51:39
+ * @LastEditTime: 2021-11-10 13:52:59
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinycms/main.go
@@ -50,6 +50,8 @@ func main() {
 	config.InitMariadb()
 	r := routing.InitAllRoutes()
 	ip := viper.GetString("publishing.server")
-	fmt.Printf("TinyCMS Api Service [ver:%s] Running at %s\n", version, ip)
+	s_info := fmt.Sprintf("TinyCMS Api Service [ver:%s] Running at %s", version, ip)
+	logger.Log.Info(s_info)
+	fmt.Printf("%s\n", s_info)
 	r.Run(ip)
 }
