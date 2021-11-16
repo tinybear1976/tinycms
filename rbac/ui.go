@@ -22,7 +22,7 @@ func _init_test_() {
 }
 
 // 按角色名称返回给前端（全量）权限，如果权限表中没有找到对应记录（异常），则返回所有模板中的数据，并全体置为拒绝状态
-func getUiPermission(role_id string) (*rbac_TreeNode, error) {
+func getUiPermission_back(role_id string) (*rbac_TreeNode, error) {
 	_init_test_()
 	conn, err := mariadb.Connect(defines.DB_MAIN)
 	if err != nil {
@@ -64,4 +64,26 @@ func makePermissionTree(pitems *[]ui_Item) *rbac_TreeNode {
 		}
 	}
 	return rootNode
+}
+
+// 前台需要返回权限，需要转换动态key的json格式{a:{a}}
+func getUiPermission_front(role_id string) (*rbac_TreeNode, error) {
+	_init_test_()
+	conn, err := mariadb.Connect(defines.DB_MAIN)
+	if err != nil {
+		return nil, err
+	}
+	items := make([]ui_Item, 0)
+	sql := "select * from rbac_role_ui_permission where isallow=1 order by parent_ui_id,ui_id;"
+	debugging.Debug_ShowSql("sql_1", sql)
+	err = conn.Select(&items, sql)
+	if err != nil {
+		return nil, err
+	}
+	var ptree *rbac_TreeNode
+	if len(items) > 0 {
+		// 生成数据并返回
+		ptree = makePermissionTree(&items)
+	}
+	return ptree, nil
 }

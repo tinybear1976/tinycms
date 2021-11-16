@@ -1,6 +1,9 @@
 package rbac
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"strings"
+)
 
 type treeNode struct {
 	Id         int         `json:"id"`
@@ -97,7 +100,7 @@ func createRootNode_rbac(pdata *ui_Item) *rbac_TreeNode {
 		UiType:      pdata.UiType,
 		Description: pdata.Description,
 		Parent_id:   pdata.Parent_id,
-		IsAllow:     pdata.IsAllow,
+		IsAllow:     bool(pdata.IsAllow),
 		ChildNodes:  make([]*rbac_TreeNode, 0),
 	}
 	return &n
@@ -113,7 +116,7 @@ func (n *rbac_TreeNode) createChildNode_rbac(pdata *ui_Item) bool {
 			UiType:      pdata.UiType,
 			Description: pdata.Description,
 			Parent_id:   pdata.Parent_id,
-			IsAllow:     pdata.IsAllow,
+			IsAllow:     bool(pdata.IsAllow),
 			ChildNodes:  make([]*rbac_TreeNode, 0),
 		}
 		n.ChildNodes = append(n.ChildNodes, &child)
@@ -140,4 +143,42 @@ func (node *rbac_TreeNode) ToJson() (string, error) {
 		return "", err
 	}
 	return string(bytes), nil
+}
+
+func (node *rbac_TreeNode) ToFrontJson() (string, error) {
+	if node == nil {
+		return "", nil
+	}
+	var sb strings.Builder
+	sb.WriteString("{")
+
+	each_nodes(&sb, node)
+
+	sb.WriteString("}")
+	j := cleanFormatter(sb.String())
+	return j, nil
+}
+
+func each_nodes(sb *strings.Builder, node *rbac_TreeNode) {
+	sb.WriteString("\"" + node.Key + "\"")
+	sb.WriteString(":")
+	if node.IsAllow {
+		sb.WriteString("1")
+	} else {
+		sb.WriteString("0")
+	}
+	sb.WriteString("{")
+	for _, n := range node.ChildNodes {
+		each_nodes(sb, n)
+	}
+	sb.WriteString("},")
+}
+
+func cleanFormatter(s string) string {
+	s = strings.ReplaceAll(s, ",}", "}")
+	s = strings.ReplaceAll(s, "1{}", "1")
+	s = strings.ReplaceAll(s, "0{}", "0")
+	s = strings.ReplaceAll(s, "1{\"", "{\"")
+	s = strings.ReplaceAll(s, "0{\"", "{\"")
+	return s
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/tinybear1976/tinycms/rbac"
 )
 
-func Rbac_GetUiPerimissionApi(c *gin.Context) {
+func Rbac_GetUiPermissionApi(c *gin.Context) {
 	jq := getRequestJson(c)
 	find_rst := jq.Find("role_id")
 	if find_rst == nil {
@@ -23,21 +23,19 @@ func Rbac_GetUiPerimissionApi(c *gin.Context) {
 		})
 		return
 	}
-
-	//fmt.Println(role_id)
-	j, err := rbac.GetUiPermission(role_id)
+	j, err := rbac.GetUiPermission_back(role_id)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusOK, gin.H{
 			"error": err.Error(),
 		})
 		return
 	}
-	r, err := stringToJson(j)
+	r, err := stringToMap(j)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusOK, gin.H{
 			"error": err.Error(),
 		})
 		return
 	}
-	c.JSON(http.StatusOK, *r)
+	c.JSON(http.StatusOK, r)
 }

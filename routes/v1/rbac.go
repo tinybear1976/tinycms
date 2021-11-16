@@ -12,6 +12,7 @@ func initRbacRoutes(r *gin.Engine) {
 	v1.Use(mw.CrossDomain())
 	//v1.Use(mw.Authenticate())
 	{
-		v1.POST("/", apis.Rbac_GetUiPerimissionApi)
+		v1.POST("/get_back_ui_permission", apis.Rbac_GetUiPermissionApi)
+		v1.POST("/get_front_ui_permission", apis.Front_GetUiPermissionApi)
 	}
 }
