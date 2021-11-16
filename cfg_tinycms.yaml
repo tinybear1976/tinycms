@@ -2,9 +2,12 @@ publishing:
   server: "127.0.0.1:9000"
 redis:
   local:
-    server: "127.0.0.1"
-    port: 6379
+    server: "127.0.0.1:6379"
     pwd: 
+    db: 0
+  audit_auth_token:   
+    server: "127.0.0.1:6379" 
+    pwd:
     db: 0
 mariadb:
   tcms:
@@ -14,4 +17,26 @@ mariadb:
     pwd: "123"
     db: tinycms
     timeout: 10
+  logclientip:
+    server: "172.16.1.250"
+    port: 3306
+    uid: root
+    pwd: "123"
+    db: tinycms
+    table: clientip_tcms
+    timeout: 10      
+audit:
+  auth_token:  # 审计auth_token策略
+    allow: true # 是否允许审计auth_token
+    expire_ms: 60000  # token保存有效时间（毫秒）
+    jam_ms: 10000  # 请求被审计后，每次请求都会被卡住jam_ms毫秒数，然后才能继续
+    repeat: 1 # token被重复n次后会被触发审计
+    allow_rbac: true      
+  log_clientip:
+    allow: true
+debug:
+  show_sql: true
+  
+  
+
     

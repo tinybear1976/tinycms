@@ -11,7 +11,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"time"
 
+	"github.com/tinybear1976/tinycms/defines"
 	routing "github.com/tinybear1976/tinycms/routes/v1"
 
 	"path"
@@ -30,9 +32,8 @@ var (
 func main() {
 	flag.BoolVar(&arg_show_version, "version", false, "usage version show version")
 	flag.Parse()
-	version := "1.0.0"
 	if arg_show_version {
-		fmt.Printf("TinyCMS Api Service current version: %s\n", version)
+		fmt.Printf("TinyCMS Api Service current version: %s\n", defines.VERSION)
 		return
 	}
 	gin.SetMode(gin.ReleaseMode)
@@ -42,16 +43,17 @@ func main() {
 		p = "."
 	}
 
-	logger.Log = logger.InitLogger(path.Join(p, "tinycms.log"), "")
+	logger.Log = logger.InitLogger(path.Join(p, "tinycms.log"), "debug") // info, error, warn
 	if logger.Log == nil {
 		panic("log creation failed, program operation aborted")
 	}
 	config.InitSpecificConfig("cfg_tinycms", "yaml", p)
 	config.InitMariadb()
+	config.InitRedis()
 	r := routing.InitAllRoutes()
 	ip := viper.GetString("publishing.server")
-	s_info := fmt.Sprintf("TinyCMS Api Service [ver:%s] Running at %s", version, ip)
+	s_info := fmt.Sprintf("TinyCMS Api Service [ver:%s] Running at %s  (start time: %s)", defines.VERSION, ip, time.Now().Format(defines.FORMATDATETIME))
 	logger.Log.Info(s_info)
-	fmt.Printf("%s\n", s_info)
+	fmt.Print(defines.GetLogo(ip))
 	r.Run(ip)
 }

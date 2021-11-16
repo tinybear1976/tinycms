@@ -132,6 +132,8 @@ github.com/golang/protobuf v1.5.1/go.mod h1:DopwsBzvsk0Fs44TXzsVbJyPhcCPeIwnvohx
 github.com/golang/protobuf v1.5.2 h1:ROPKBNFfQgOUMifHyP+KYbvpjbdoFNs+aK7DXlji0Tw=
 github.com/golang/protobuf v1.5.2/go.mod h1:XVQd3VNwM+JqD3oG2Ue2ip4fOMUkwXdXDdiuN0vRsmY=
 github.com/golang/snappy v0.0.3/go.mod h1:/XxbfmMg8lxefKM7IXC3fBNl/7bRcc72aCRzEWrmP2Q=
+github.com/gomodule/redigo v1.8.2 h1:H5XSIre1MB5NbPYFp+i1NBbb5qN1W8Y8YAQoAYbkm8k=
+github.com/gomodule/redigo v1.8.2/go.mod h1:P9dn9mFrCBvWhGE1wpxx6fgq7BAeLBk+UUUzlpkBYO0=
 github.com/google/btree v0.0.0-20180813153112-4030bb1f1f0c/go.mod h1:lNA+9X1NB3Zf8V7Ke586lFgjr2dZNuvo3lPJSGZ5JPQ=
 github.com/google/btree v1.0.0/go.mod h1:lNA+9X1NB3Zf8V7Ke586lFgjr2dZNuvo3lPJSGZ5JPQ=
 github.com/google/go-cmp v0.2.0/go.mod h1:oXzfMopK8JAjlY9xF4vHSVASa0yLyX7SntLO5aqRK0M=
@@ -280,12 +282,17 @@ github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5Cc
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/subosito/gotenv v1.2.0 h1:Slr1R9HxAlEKefgq5jn9U+DnETlIUa6HfgEzj0g5d7s=
 github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69rRypqCw=
+github.com/thedevsaddam/gojsonq v1.9.1 h1:zQulEP43nwmq5EKrNWyIgJVbqDeMdC1qzXM/f5O15a0=
+github.com/thedevsaddam/gojsonq v2.3.0+incompatible h1:i2lFTvGY4LvoZ2VUzedsFlRiyaWcJm3Uh6cQ9+HyQA8=
+github.com/thedevsaddam/gojsonq v2.3.0+incompatible/go.mod h1:RBcQaITThgJAAYKH7FNp2onYodRz8URfsuEGpAch0NA=
 github.com/tinybear1976/cross_authenticate v0.0.0-20211109144705-e7654b27a65d h1:Gw4nHfs+XLRNpq2nlNLi3JTTucE2oD/n8DaM3nkqWEA=
 github.com/tinybear1976/cross_authenticate v0.0.0-20211109144705-e7654b27a65d/go.mod h1:Bo2cYzjqxp56ZbAcVGSzeaTzXNRYAkxOB+nxXdnFjYk=
 github.com/tinybear1976/database-mariadb v0.1.0 h1:zBrpe76pf6ZUe1zGnzTtd1l8Q0jdgJ0ZULMkq6b+rZ0=
 github.com/tinybear1976/database-mariadb v0.1.0/go.mod h1:drfSmW5EGMw6T58RQI1L1aqAxvkTrQ62987WfI0edfI=
 github.com/tinybear1976/localsystem v0.2.0 h1:dLpsp3HG/gYilRXy4XdtfITr4q+CiGIUDJhmMSqkK/k=
 github.com/tinybear1976/localsystem v0.2.0/go.mod h1:3xnXD9yh8BWvYmMFxtLzAoqn5/1+stfWthLFnbqnvbI=
+github.com/tinybear1976/redisdb2 v0.0.0-20211111111600-d7c4d784aeb3 h1:GbWJrUS1OMr2LAyMg9kK06DqkXB8Bw1TkK2aglC1w64=
+github.com/tinybear1976/redisdb2 v0.0.0-20211111111600-d7c4d784aeb3/go.mod h1:JLFxR5LwylCX2/R/lsuNek3A5wMQK4NP/iN/YAifir8=
 github.com/ugorji/go v1.1.7 h1:/68gy2h+1mWMrwZFeD1kQialdSzAb432dtpeJ42ovdo=
 github.com/ugorji/go v1.1.7/go.mod h1:kZn38zHttfInRq0xu/PH0az30d+z6vm202qpg1oXVMw=
 github.com/ugorji/go/codec v1.1.7 h1:2SvQaVZ1ouYrrKKwoSk2pzd4A9evlKJb9oTL+OaLUSs=

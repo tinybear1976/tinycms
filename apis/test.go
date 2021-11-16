@@ -21,6 +21,7 @@ import (
 )
 
 func TestApi(c *gin.Context) {
+	//c.ClientIP()
 	t1 := setToken("U001")
 	fmt.Println("t1", t1)
 	t2 := setToken2(t1, "d502")

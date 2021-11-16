@@ -13,21 +13,22 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
+	"github.com/tinybear1976/localsystem/logger"
 )
 
-func InitConfig() {
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath(".")
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %s", err))
-	}
-	viper.WatchConfig()
-	viper.OnConfigChange(func(e fsnotify.Event) {
-		fmt.Println("Config file changed:", e.Name)
-	})
-}
+// func InitConfig() {
+// 	viper.SetConfigName("config")
+// 	viper.SetConfigType("yaml")
+// 	viper.AddConfigPath(".")
+// 	err := viper.ReadInConfig()
+// 	if err != nil {
+// 		panic(fmt.Errorf("fatal error config file: %s", err))
+// 	}
+// 	viper.WatchConfig()
+// 	viper.OnConfigChange(func(e fsnotify.Event) {
+// 		fmt.Println("Config file changed:", e.Name)
+// 	})
+// }
 
 func InitSpecificConfig(onlyMFilename, fileType, filePath string) {
 	viper.SetConfigName(onlyMFilename)
@@ -40,5 +41,6 @@ func InitSpecificConfig(onlyMFilename, fileType, filePath string) {
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("Config file changed:", e.Name)
+		logger.Log.Warn("config file changed:" + e.Name)
 	})
 }
