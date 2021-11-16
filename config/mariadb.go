@@ -16,6 +16,7 @@ import (
 	"github.com/spf13/viper"
 	mariadb "github.com/tinybear1976/database-mariadb"
 	"github.com/tinybear1976/localsystem/logger"
+	"github.com/tinybear1976/tinycms/debugging"
 	"github.com/tinybear1976/tinycms/defines"
 )
 
@@ -68,12 +69,12 @@ func once_check_log_clientip_table_exists() {
 	}
 	temp := string(bytes)
 	sql := strings.Replace(temp, defines.SCRP_TAG_LOG_CLIENTIP_TABLENAME, viper.GetString("mariadb.logclientip.table"), -1)
-	// fmt.Println(sql)
 	conn, err := mariadb.Connect(defines.DB_LOG_CLIENTIP)
 	if err != nil {
 		logger.Log.Panic("exec script file connection error: " + filename)
 		panic("exec script file connection error: " + filename)
 	}
+	debugging.Debug_ShowSql("log_clientip_create_table", sql)
 	_, err = conn.Exec(sql)
 	if err != nil {
 		logger.Log.Panic("exec script file error: " + filename)
