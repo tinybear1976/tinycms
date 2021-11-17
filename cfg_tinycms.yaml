@@ -35,7 +35,7 @@ audit:
   log_clientip:
     allow: true
 debug:
-  show_sql: false
+  show_sql: true
   
   
 

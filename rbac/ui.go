@@ -113,6 +113,7 @@ func saveUiPermission_back(pNode *rbac_TreeNode) error {
 	for _, item := range *items {
 		sql_ins := fmt.Sprintf("INSERT INTO rbac_role_ui_permission (role_id, ui_id, ui_key, ui_type, description, parent_ui_id, isallow) VALUES ('%s', %d, '%s', '%s', '%s', %d, %v);",
 			item.Role_Id, item.Id, item.Key, item.UiType, item.Description, item.Parent_id, item.IsAllow)
+		debugging.Debug_ShowSql("delete role permission", sql_ins)
 		_, err = tx.Exec(sql_ins)
 		if err != nil {
 			tx.Rollback()
