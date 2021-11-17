@@ -13,12 +13,13 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/gin-contrib/pprof"
+	"github.com/gin-gonic/gin"
 	"github.com/tinybear1976/tinycms/defines"
 	routing "github.com/tinybear1976/tinycms/routes/v1"
 
 	"path"
 
-	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"github.com/tinybear1976/localsystem"
 	"github.com/tinybear1976/localsystem/logger"
@@ -36,13 +37,12 @@ func main() {
 		fmt.Printf("TinyCMS Api Service current version: %s\n", defines.VERSION)
 		return
 	}
-	gin.SetMode(gin.ReleaseMode)
+	//
 	p, err := localsystem.CurrentDirectory()
 	if err != nil {
 		logger.Log.Warn("failed to get the current service running path")
 		p = "."
 	}
-
 	logger.Log = logger.InitLogger(path.Join(p, "tinycms.log"), "debug") // info, error, warn
 	if logger.Log == nil {
 		panic("log creation failed, program operation aborted")
@@ -50,10 +50,16 @@ func main() {
 	config.InitSpecificConfig("cfg_tinycms", "yaml", p)
 	config.InitMariadb()
 	config.InitRedis()
+	if !viper.GetBool(defines.YML_DEBUG_GIN) {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	r := routing.InitAllRoutes()
 	ip := viper.GetString("publishing.server")
 	s_info := fmt.Sprintf("TinyCMS Api Service [ver:%s] Running at %s  (start time: %s)", defines.VERSION, ip, time.Now().Format(defines.FORMATDATETIME))
 	logger.Log.Info(s_info)
 	fmt.Print(defines.GetLogo(ip))
+	if viper.GetBool(defines.YML_DEBUG_PPROF) {
+		pprof.Register(r)
+	}
 	r.Run(ip)
 }

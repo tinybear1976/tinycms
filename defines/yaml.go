@@ -7,5 +7,7 @@ const (
 	YML_ADT_AUTHTOKEN_JAM        = "audit.auth_token.jam_ms"
 	YML_ADT_AUTHTOKEN_ALLOW_RBAC = "audit.auth_token.allow_rbac"
 	YML_ADT_LOG_CLIENTIP_ALLOW   = "audit.log_clientip.allow"
+	YML_DEBUG_GIN                = "debug.gin"
 	YML_DEBUG_SQL                = "debug.show_sql"
+	YML_DEBUG_PPROF              = "debug.pprof"
 )

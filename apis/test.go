@@ -103,3 +103,16 @@ func checkToken(t1, t2 string) (error, bool) {
 	}
 	return nil, true
 }
+
+func T_slice(c *gin.Context) {
+	ints := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+	new_ints := copy_slice(ints)
+	fmt.Println("old:", ints)
+	fmt.Println("new:", new_ints)
+}
+
+func copy_slice(ints []int) []int {
+	my := make([]int, 3)
+	copy(my, ints)
+	return my
+}

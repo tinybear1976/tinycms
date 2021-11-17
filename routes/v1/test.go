@@ -13,5 +13,7 @@ func initTestRoutes(r *gin.Engine) {
 	v1.Use(mw.Authenticate())
 	{
 		v1.POST("/", apis.TestApi)
+		v1.POST("/copy_slice", apis.T_slice)
+
 	}
 }

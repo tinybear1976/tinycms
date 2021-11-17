@@ -24,6 +24,7 @@ func SaveUiPermission_back(j string) error {
 	var items rbac_TreeNode
 	b := []byte(j)
 	err := json.Unmarshal(b, &items)
+	// b = nil
 	if err != nil {
 		return err
 	}
