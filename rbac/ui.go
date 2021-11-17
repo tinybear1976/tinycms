@@ -30,8 +30,8 @@ func getUiPermission_back(role_id string) (*rbac_TreeNode, error) {
 		return nil, err
 	}
 	items := make([]ui_DB_Item, 0)
-	sql_1 := "select * from rbac_role_ui_permission order by parent_ui_id,ui_id;"
-	sql_2 := "select '" + role_id + "' as role_id,0 as isallow, rbac_ui_temp.* from rbac_ui_temp order by parent_ui_id,ui_id;"
+	sql_1 := "SELECT * FROM rbac_role_ui_permission ORDER BY parent_ui_id,ui_id;"
+	sql_2 := "SELECT '" + role_id + "' AS role_id,0 AS isallow, rbac_ui_temp.* FROM rbac_ui_temp ORDER BY parent_ui_id,ui_id;"
 	debugging.Debug_ShowSql("sql_1", sql_1)
 	err = conn.Select(&items, sql_1)
 	if err != nil {
@@ -75,8 +75,8 @@ func getUiPermission_front(role_id string) (*rbac_TreeNode, error) {
 		return nil, err
 	}
 	items := make([]ui_DB_Item, 0)
-	sql := "select * from rbac_role_ui_permission where isallow=1 order by parent_ui_id,ui_id;"
-	debugging.Debug_ShowSql("sql_1", sql)
+	sql := "SELECT * FROM rbac_role_ui_permission WHERE isallow=1 ORDER BY parent_ui_id,ui_id;"
+	debugging.Debug_ShowSql("sql", sql)
 	err = conn.Select(&items, sql)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func saveUiPermission_back(pNode *rbac_TreeNode) error {
 	if err != nil {
 		return err
 	}
-	sql_del := "delete from rbac_role_ui_permission where role_id='" + pNode.Role_Id + "';"
+	sql_del := "DELETE FROM rbac_role_ui_permission WHERE role_id='" + pNode.Role_Id + "';"
 	debugging.Debug_ShowSql("delete role permission", sql_del)
 	_, err = tx.Exec(sql_del)
 	if err != nil {
@@ -113,7 +113,7 @@ func saveUiPermission_back(pNode *rbac_TreeNode) error {
 	for _, item := range *items {
 		sql_ins := fmt.Sprintf("INSERT INTO rbac_role_ui_permission (role_id, ui_id, ui_key, ui_type, description, parent_ui_id, isallow) VALUES ('%s', %d, '%s', '%s', '%s', %d, %v);",
 			item.Role_Id, item.Id, item.Key, item.UiType, item.Description, item.Parent_id, item.IsAllow)
-		debugging.Debug_ShowSql("delete role permission", sql_ins)
+		debugging.Debug_ShowSql("insert role permission", sql_ins)
 		_, err = tx.Exec(sql_ins)
 		if err != nil {
 			tx.Rollback()
