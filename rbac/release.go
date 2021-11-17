@@ -20,13 +20,13 @@ func GetUiPermission_front(role_id string) (string, error) {
 	return ptree.toFrontJson()
 }
 
-func SaveUiPermission_back(j string) (bool, error) {
+func SaveUiPermission_back(j string) error {
 	var items rbac_TreeNode
 	b := []byte(j)
 	err := json.Unmarshal(b, &items)
 	if err != nil {
-		return false, err
+		return err
 	}
-	ok, err := saveUiPermission_back(&items)
-	return ok, err
+	err = saveUiPermission_back(&items)
+	return err
 }

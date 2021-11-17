@@ -89,11 +89,36 @@ func getUiPermission_front(role_id string) (*rbac_TreeNode, error) {
 	return ptree, nil
 }
 
-func saveUiPermission_back(pNode *rbac_TreeNode) (bool, error) {
+func saveUiPermission_back(pNode *rbac_TreeNode) error {
 	items, err := pNode.unTree()
 	if err != nil {
-		return false, err
+		return err
 	}
-	fmt.Println(items)
-	return true, nil
+	conn, err := mariadb.Connect(defines.DB_MAIN)
+	if err != nil {
+		return err
+	}
+	//fmt.Println(items)
+	tx, err := conn.Beginx()
+	if err != nil {
+		return err
+	}
+	sql_del := "delete from rbac_role_ui_permission where role_id='" + pNode.Role_Id + "';"
+	debugging.Debug_ShowSql("delete role permission", sql_del)
+	_, err = tx.Exec(sql_del)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	for _, item := range *items {
+		sql_ins := fmt.Sprintf("INSERT INTO rbac_role_ui_permission (role_id, ui_id, ui_key, ui_type, description, parent_ui_id, isallow) VALUES ('%s', %d, '%s', '%s', '%s', %d, %v);",
+			item.Role_Id, item.Id, item.Key, item.UiType, item.Description, item.Parent_id, item.IsAllow)
+		_, err = tx.Exec(sql_ins)
+		if err != nil {
+			tx.Rollback()
+			return err
+		}
+	}
+	tx.Commit()
+	return err
 }
