@@ -14,7 +14,7 @@ func currentUser(c *gin.Context) string {
 	return c.GetString(defines.KEYUserInfo)
 }
 
-func getRequestJson(c *gin.Context) *gojsonq.JSONQ {
+func getRequestJsonQ(c *gin.Context) *gojsonq.JSONQ {
 	raw, _ := c.GetRawData()
 	sjsonbody := string(raw)
 	jq := gojsonq.New().FromString(sjsonbody)
@@ -38,8 +38,6 @@ func getRequestJsonString(c *gin.Context) string {
 func stringToMap(sjson string) (map[string]interface{}, error) {
 	var dat map[string]interface{}
 	bytes := []byte(sjson)
-
 	err := json.Unmarshal(bytes, &dat)
-
 	return dat, err
 }

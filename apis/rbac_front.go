@@ -9,7 +9,7 @@ import (
 )
 
 func Front_GetUiPermissionApi(c *gin.Context) {
-	jq := getRequestJson(c)
+	jq := getRequestJsonQ(c)
 	find_rst := jq.Find("role_id")
 	if find_rst == nil {
 		c.AbortWithStatusJSON(http.StatusOK, gin.H{
