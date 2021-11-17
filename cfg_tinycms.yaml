@@ -36,8 +36,8 @@ audit:
     allow: true
 debug:
   gin: false
-  show_sql: false
-  pprof: true
+  show_sql: true
+  pprof: false
   
   
 

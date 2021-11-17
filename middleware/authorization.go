@@ -14,6 +14,7 @@ import (
 	mariadb "github.com/tinybear1976/database-mariadb"
 	"github.com/tinybear1976/localsystem/logger"
 	"github.com/tinybear1976/redisdb2"
+	"github.com/tinybear1976/tinycms/debugging"
 	"github.com/tinybear1976/tinycms/defines"
 )
 
@@ -140,7 +141,7 @@ func audit_auth_token_direct(ip, E string) {
 	}
 	conn, err := redisdb2.Connect(defines.REDIS_AUTH_TOKEN)
 	if err != nil {
-		logger.Log.Error(err.Error())
+		logger.LogContainer[defines.LOG_APP].Error(err.Error())
 		return
 	}
 	redisdb2.SET(conn, "BL::"+ip, E+";"+time.Now().Format(defines.FORMATDATETIME14))
@@ -155,7 +156,7 @@ func audit_auth_token(a *Author) (ret_ok bool) {
 	}
 	conn, err := redisdb2.Connect(defines.REDIS_AUTH_TOKEN)
 	if err != nil {
-		logger.Log.Error(err.Error())
+		logger.LogContainer[defines.LOG_APP].Error(err.Error())
 		return
 	}
 	// 先检查审计出来的黑名单
@@ -186,7 +187,7 @@ func audit_auth_token(a *Author) (ret_ok bool) {
 			}
 		}
 	} else {
-		logger.Log.Error(err.Error())
+		logger.LogContainer[defines.LOG_APP].Error(err.Error())
 	}
 	redisdb2.Diconnect(conn)
 	return
@@ -234,6 +235,7 @@ func rec_clientip(c *gin.Context) {
 	//fmt.Println("request url: ", c.Request.URL.Path)
 	//fmt.Println("from ip: ", c.ClientIP())
 	sql := "INSERT INTO " + viper.GetString("mariadb.logclientip.table") + " (recdate, clientip, urlpath, userid) VALUES (now(), '" + c.ClientIP() + "', '" + c.Request.URL.Path + "', '');"
+	debugging.Debug_ShowSql("rec web client ip(no user)", sql)
 	exec_record_clientip(sql)
 }
 
@@ -244,17 +246,18 @@ func rec_clientip_user(a *Author) {
 	//fmt.Println("request url: ", a.Url)
 	//fmt.Println("from ip: ", a.ClientIP)
 	sql := "INSERT INTO " + viper.GetString("mariadb.logclientip.table") + " (recdate, clientip, urlpath, userid) VALUES (now(), '" + a.ClientIP + "', '" + a.Url + "', '" + a.User + "');"
+	debugging.Debug_ShowSql("rec web client ip(user)", sql)
 	exec_record_clientip(sql)
 }
 
 func exec_record_clientip(sql string) {
 	conn, err := mariadb.Connect(defines.DB_LOG_CLIENTIP)
 	if err != nil {
-		logger.Log.Error("rec client ip connection error: " + err.Error())
+		logger.LogContainer[defines.LOG_APP].Error("rec client ip connection error: " + err.Error())
 		return
 	}
 	_, err = conn.Exec(sql)
 	if err != nil {
-		logger.Log.Error("rec client ip insert error: " + err.Error())
+		logger.LogContainer[defines.LOG_APP].Error("rec client ip insert error: " + err.Error())
 	}
 }

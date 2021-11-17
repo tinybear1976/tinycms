@@ -12,6 +12,6 @@ require (
 	github.com/thedevsaddam/gojsonq v2.3.0+incompatible
 	github.com/tinybear1976/cross_authenticate v0.0.0-20211109144705-e7654b27a65d
 	github.com/tinybear1976/database-mariadb v0.1.0
-	github.com/tinybear1976/localsystem v0.2.0
+	github.com/tinybear1976/localsystem v0.2.1-0.20211117135211-648572e70cf0
 	github.com/tinybear1976/redisdb2 v0.0.0-20211111111600-d7c4d784aeb3
 )

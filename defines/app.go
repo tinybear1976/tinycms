@@ -9,15 +9,17 @@ import (
 )
 
 const (
-	SIGN_LOGIN  = "login"
-	SIGN_LOGOUT = "logout"
-
+	APP              = "tcms"
+	SIGN_LOGIN       = "login"
+	SIGN_LOGOUT      = "logout"
 	DB_MAIN          = "tcms"
 	DB_LOG_CLIENTIP  = "logclientip"
 	REDIS_AUTH_TOKEN = "audit_auth_token"
+	LOG_APP          = APP + "_base"
+	LOG_SQL          = APP + "_debug_sql"
+	VERSION          = "1.7.0"
 
-	VERSION = "1.7.0"
-	LOGO    = "\n" +
+	LOGO = "\n" +
 		" _____  __  _   __  ___" + "        " + "TinyCMS Api Service " + VERSION + "\n" +
 		"/_  _/,'_/ / \\,' /,' _/" + "        " + "IP:    {{{{ip}}}}" + "\n" +
 		" / / / /_ / \\,' /_\\ `. " + "        " + "Port:  {{{{port}}}}" + "\n" +

@@ -14,6 +14,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 	"github.com/tinybear1976/localsystem/logger"
+	"github.com/tinybear1976/tinycms/defines"
 )
 
 // func InitConfig() {
@@ -41,6 +42,6 @@ func InitSpecificConfig(onlyMFilename, fileType, filePath string) {
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("Config file changed:", e.Name)
-		logger.Log.Warn("config file changed:" + e.Name)
+		logger.LogContainer[defines.LOG_APP].Warn("config file changed:" + e.Name)
 	})
 }

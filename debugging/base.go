@@ -11,7 +11,7 @@ import (
 func Debug_ShowSql(tag, sql string) {
 	if viper.GetBool(defines.YML_DEBUG_SQL) {
 		o := "[" + tag + "] " + sql
-		logger.Log.Debug(o)
+		logger.LogContainer[defines.LOG_SQL].Debug(o)
 		fmt.Println("Debug SQL: ", o)
 	}
 }
