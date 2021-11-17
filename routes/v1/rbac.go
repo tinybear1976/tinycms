@@ -14,5 +14,6 @@ func initRbacRoutes(r *gin.Engine) {
 	{
 		v1.POST("/get_back_ui_permission", apis.Rbac_GetUiPermissionApi)
 		v1.POST("/get_front_ui_permission", apis.Front_GetUiPermissionApi)
+		v1.POST("/save_back_ui_permission", apis.Rbac_SaveUiPermissionApi)
 	}
 }

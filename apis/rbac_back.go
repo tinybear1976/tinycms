@@ -39,3 +39,26 @@ func Rbac_GetUiPermissionApi(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, r)
 }
+
+func Rbac_SaveUiPermissionApi(c *gin.Context) {
+	j := getRequestJsonString(c)
+
+	ok, err := rbac.SaveUiPermission_back(j)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusOK, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	if ok {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    200,
+			"message": "save success",
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"error": "save fail",
+		})
+	}
+
+}

@@ -16,7 +16,7 @@ const (
 	DB_LOG_CLIENTIP  = "logclientip"
 	REDIS_AUTH_TOKEN = "audit_auth_token"
 
-	VERSION = "1.5.0"
+	VERSION = "1.6.0"
 	LOGO    = "\n" +
 		" _____  __  _   __  ___" + "        " + "TinyCMS Api Service " + VERSION + "\n" +
 		"/_  _/,'_/ / \\,' /,' _/" + "        " + "IP:    {{{{ip}}}}" + "\n" +

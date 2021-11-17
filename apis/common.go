@@ -22,6 +22,13 @@ func getRequestJson(c *gin.Context) *gojsonq.JSONQ {
 	return jq
 }
 
+func getRequestJsonString(c *gin.Context) string {
+	raw, _ := c.GetRawData()
+	sjsonbody := string(raw)
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(raw))
+	return sjsonbody
+}
+
 // func stringToJson(sjson string) (*interface{}, error) {
 // 	var r interface{}
 // 	err := json.Unmarshal([]byte(sjson), &r)

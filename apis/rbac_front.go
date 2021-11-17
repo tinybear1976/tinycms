@@ -24,7 +24,7 @@ func Front_GetUiPermissionApi(c *gin.Context) {
 		})
 		return
 	}
-	j, err := rbac.GetUiPeimission_front(role_id)
+	j, err := rbac.GetUiPermission_front(role_id)
 	fmt.Println(j)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusOK, gin.H{
