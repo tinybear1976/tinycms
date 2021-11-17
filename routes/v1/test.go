@@ -10,7 +10,7 @@ func initTestRoutes(r *gin.Engine) {
 	var url string = "/api/v1/test"
 	v1 := r.Group(url)
 	v1.Use(mw.CrossDomain())
-	v1.Use(mw.Authenticate())
+	//v1.Use(mw.Authenticate())
 	{
 		v1.POST("/", apis.TestApi)
 		v1.POST("/copy_slice", apis.T_slice)
