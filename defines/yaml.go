@@ -10,4 +10,6 @@ const (
 	YML_DEBUG_GIN                = "debug.gin"
 	YML_DEBUG_SQL                = "debug.show_sql"
 	YML_DEBUG_PPROF              = "debug.pprof"
+	YML_UPLOAD_MAX_SIZE          = "service.upload.max_size"
+	YML_UPLOAD_SAVE_PATH         = "service.upload.save_path"
 )

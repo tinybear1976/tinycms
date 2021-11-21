@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-09-24 21:18:01
- * @LastEditTime: 2021-11-09 21:15:48
- * @LastEditors: your name
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: /apiservice/apis/test.go
- */
 package apis
 
 import (
@@ -13,11 +5,15 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"net/http"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
+	"github.com/tinybear1976/largefileupload"
+	"github.com/tinybear1976/tinycms/defines"
 )
 
 func TestApi(c *gin.Context) {
@@ -115,4 +111,16 @@ func copy_slice(ints []int) []int {
 	my := make([]int, 3)
 	copy(my, ints)
 	return my
+}
+
+func T_LargefileUploadApi(c *gin.Context) {
+	max_size := viper.GetInt64(defines.YML_UPLOAD_MAX_SIZE)
+	fmt.Println("max_size", max_size)
+	upload_path := viper.GetString(defines.YML_UPLOAD_SAVE_PATH)
+	fmt.Println("save_path", upload_path)
+	files, err := largefileupload.LargeFileUpload(c.Request, upload_path, max_size)
+	fmt.Println("err", err)
+	c.JSON(http.StatusOK, gin.H{
+		"files": files,
+	})
 }

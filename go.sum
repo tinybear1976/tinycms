@@ -298,6 +298,8 @@ github.com/tinybear1976/cross_authenticate v0.0.0-20211109144705-e7654b27a65d h1
 github.com/tinybear1976/cross_authenticate v0.0.0-20211109144705-e7654b27a65d/go.mod h1:Bo2cYzjqxp56ZbAcVGSzeaTzXNRYAkxOB+nxXdnFjYk=
 github.com/tinybear1976/database-mariadb v0.1.0 h1:zBrpe76pf6ZUe1zGnzTtd1l8Q0jdgJ0ZULMkq6b+rZ0=
 github.com/tinybear1976/database-mariadb v0.1.0/go.mod h1:drfSmW5EGMw6T58RQI1L1aqAxvkTrQ62987WfI0edfI=
+github.com/tinybear1976/largefileupload v0.0.0-20211121034942-eef77222082a h1:EbfM85+u/aJe5K3eAZo9Gpp4vkg7eok8XT6lciYpK+Q=
+github.com/tinybear1976/largefileupload v0.0.0-20211121034942-eef77222082a/go.mod h1:MxfMLcdxIl4cryeW1Nl6PMX/shmSCc5FbFNP1rqyBoA=
 github.com/tinybear1976/localsystem v0.2.1-0.20211117124946-1afe84c0b12a h1:3mR+lfCjcz/b5wOpaE+QK9PEZdGsuv5ceVS7akslOyg=
 github.com/tinybear1976/localsystem v0.2.1-0.20211117124946-1afe84c0b12a/go.mod h1:3xnXD9yh8BWvYmMFxtLzAoqn5/1+stfWthLFnbqnvbI=
 github.com/tinybear1976/localsystem v0.2.1-0.20211117135211-648572e70cf0 h1:p0UtIk5vZAsukQ3iMc2XeLbZ0N405OuJfTA0JS76gNA=

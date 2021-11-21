@@ -35,9 +35,14 @@ audit:
   log_clientip:
     allow: true
 debug:
-  gin: false
-  show_sql: true
-  pprof: false
+  gin: false  # false:将gin设置为release模式; true:为debug模式
+  show_sql: false  # 是否显示程序中的sql，已用于调试
+  pprof: false  # 是否开启挂接性能测试工具
+service:
+  upload:
+    max_size: 524288000  # 上传最大文件尺寸限制，基本值形式参考  1*1024*1024 = 1MB
+    save_path: "./upload"
+
   
   
 

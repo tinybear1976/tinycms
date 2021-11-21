@@ -14,6 +14,7 @@ func initTestRoutes(r *gin.Engine) {
 	{
 		v1.POST("/", apis.TestApi)
 		v1.POST("/copy_slice", apis.T_slice)
-
+		v1.POST("/luf", apis.T_LargefileUploadApi)
 	}
+	r.StaticFile("/upload.html", "./html/upload.html")
 }
